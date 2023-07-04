@@ -12,12 +12,12 @@ let api_config = {
 }
 
 const createDom = (structuredom) => {
-    // vars
+    // * vars
     let welcome = structuredom.createElement('h1');
     let input = structuredom.createElement('input');
     let container = structuredom.createElement('div');
     let script = structuredom.createElement('script');
-    // attrs and text    
+    // * attrs and text    
     welcome.textContent += "Nasa"; 
     input.setAttribute('placeholder', 'Busca el asteroide!!'); 
     container.setAttribute('class', 'nasa-info'); 
@@ -28,21 +28,21 @@ const createDom = (structuredom) => {
 }
 
 let server = http.createServer((req, res) => {
-    // static files 
+    // * static files 
     let filePath = '.' + req.url; 
     if(filePath == "./home" || filePath == "./Home" || filePath == './') {
-        // contentType format and dom virtual
+        // * contentType format and dom virtual
         contentType = 'text/html'; 
         let dom = new JSDOM('<!DOCTYPE html><html lang="es"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><head></head><body></body></html>'); 
        
-        // stament 
+        // * stament 
         let document = dom.window.document;
 
-        // elements body 
+        // * elements body 
         let elements = createDom(document); 
         document.body.append(...elements);
   
-        // server use static files
+        // * server use static files
         let serialDOM = dom.serialize(); 
         res.setHeader('Content-Type', contentType); 
         res.statusCode = 200; 
@@ -70,13 +70,13 @@ let server = http.createServer((req, res) => {
     }
 }); 
 
-// server url 
+// * server url 
 let config = {
     hostname: "127.223.22",
     port: 5013
 }
 
-// listener in server
+// * listener in server
 server.listen(config, () => {
     console.log('server listening in rute URL => http://'+config.hostname+":"+config.port); 
 })
